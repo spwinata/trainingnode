@@ -1,0 +1,23 @@
+version: "2"
+services:
+  mongo:
+    image: "mongo"
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=*dm*n
+      - MONGO_INITDB_ROOT_PASSWORD=do*****3
+    volumes: 
+      - mongo-data:/data/db
+  mongo_express:
+    image: "mongo-express"
+    depends_on:
+      - mongo
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=*dm*n
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=do*****3
+    ports:
+      - 8081:8081
+
+volumes:
+  mongo-data:

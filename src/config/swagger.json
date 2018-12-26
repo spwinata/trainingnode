@@ -1,0 +1,221 @@
+{
+    "swagger": "2.0",
+    "title": "AGEN API Documentation",
+    "description": "Agen API CRUD",
+    "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "Agen",
+            "description": "Api for agen endpoints"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/agen": {
+            "post": {
+                "tags": ["Agen"],
+                "summary": "API endpoint untuk membuat agen",
+                "description": "Membuat agen baru",
+                "parameters": [
+                    {
+                        "name": "agen",
+                        "description": "Parameter untuk membuat agen",
+                        "in": "body",
+                        "required": "true",
+                        "schema": {
+                            "$ref": "#definitions/Agen"
+                        }                     
+                    }                    
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Agen baru telah dibuat",
+                        "schema": {
+                            "$ref": "#definitions/Agen"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Agen"],
+                "summary": "API endpoint untuk list semua agen",
+                "description": "List semua agen dari database",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "type": "integer",
+                        "description": "Index halaman yang di cari",
+                        "in": "query"                     
+                    },
+                    {
+                        "name": "perPage",
+                        "type": "integer",
+                        "description": "Jumlah data yang muncul per halaman contoh 10",
+                        "in": "query"                     
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Semua agen",
+                        "schema": {
+                            "$ref": "#definitions/Agens"
+                        }
+                    }
+                }
+            }
+        },
+        "/agen/{id}": {
+            "parameters":[
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": "true",
+                    "description": "id dari agen",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": ["Agen"],
+                "summary": "API endpoint mencari agen",
+                "description": "Mencari satu agen dari database",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Agen ditemukan",
+                        "schema": {
+                            "$ref": "#definitions/Agen"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Agen"],
+                "summary": "API endpoint merubah data agen",
+                "description": "Merubah data agen",
+                "parameters": [
+                    {
+                        "name": "agen",
+                        "description": "Parameter agen yang akan diubah",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#definitions/UpdateAgen"
+                        }                     
+                    }                    
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Agen sudah diubah",
+                        "schema": {
+                            "$ref": "#definitions/Agen"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Agen"],
+                "summary": "API endpoint untuk menghapus agen",
+                "description": "Hapus agen dari database",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Agen sudah dihapus",
+                        "schema": {
+                            "$ref": "#definitions/Agen"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Agen": {
+            "required": [
+                "no_agen",
+                "nama_agen",
+                "kode_jabatan",
+                "no_agen_induk",
+                "level_agen"
+            ],
+            "properties": {
+                "no_agen": {
+                    "type": "integer",
+                    "format": "Int32"
+                },
+                "nama_agen": {
+                    "type": "string"
+                },
+                "kode_jabatan": {
+                    "type": "string"
+                },
+                "no_agen_induk": {
+                    "type": "integer",
+                    "format": "Int32"
+                },
+                "level_agen": {
+                    "type": "integer",
+                    "format": "Int32"
+                }
+            }
+        },
+        "Agens": {
+            "properties": {
+                "docs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/Agen"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                },
+                "pages": {
+                    "type": "integer"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                }
+            }
+        },
+        "UpdateAgen": {
+            "properties": {
+                "no_agen": {
+                    "type": "integer",
+                    "format": "Int32"
+                },
+                "nama_agen": {
+                    "type": "string"
+                },
+                "kode_jabatan": {
+                    "type": "string"
+                },
+                "no_agen_induk": {
+                    "type": "integer",
+                    "format": "Int32"
+                },
+                "level_agen": {
+                    "type": "integer",
+                    "format": "Int32"
+                }
+            }
+        }
+    }
+}
